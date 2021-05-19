@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -55,6 +56,12 @@ dependencies {
 
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.4'
 
+    //Injection dependency
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
 
 
+    implementation "androidx.room:room-runtime:2.2.6"
+    implementation "androidx.room:room-ktx:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
 }
