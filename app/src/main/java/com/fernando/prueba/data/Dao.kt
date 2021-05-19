@@ -20,4 +20,13 @@ interface Dao {
     @Query("UPDATE post set isRead=:isRead where id=:id")
     suspend fun readPost(isRead:Boolean, id:Int)
 
+    @Query("Update post set isFavorite=:isFavorite where id=:id")
+    suspend fun setFavorite(isFavorite:Boolean, id:Int)
+
+    @Query("DELETE from post where id=:id")
+    suspend fun deletePost(id: Int)
+
+    @Query("DELETE from post")
+    suspend fun deleteAllPosts()
+
 }

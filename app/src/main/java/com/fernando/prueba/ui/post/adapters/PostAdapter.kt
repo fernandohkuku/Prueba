@@ -37,8 +37,15 @@ class PostAdapter(
 
     internal fun removeItem(position: Int){
         var post:Post = this.mData[position];
+        listener.onDeletePost(post, position)
         this.mData.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    internal fun updateItem(post: Post, position: Int){
+        post.isRead = false;
+        this.mData.add(position, post);
+        notifyItemChanged(position)
     }
 
     internal fun restoreItem(post: Post, position: Int){
@@ -47,7 +54,7 @@ class PostAdapter(
         notifyItemInserted(position)
     }
 
-    inner class PostHolder(private val binding: ItemPostBinding):RecyclerView.ViewHolder(binding.root){
+    inner class PostHolder(val binding: ItemPostBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(post: Post, position: Int) {
             if (post.isRead!!){
                 this.binding.textView
@@ -55,6 +62,11 @@ class PostAdapter(
             }else{
                 this.binding.textView
                     .setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
+            if(post.isFavorite!!){
+                this.binding.tvFavorite.setBackgroundResource(R.drawable.ic_star)
+            }else{
+                this.binding.tvFavorite.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
             }
             this.binding.tvTitle.text = post.title.toString()
             this.binding.tvBody.text = post.body.toString()
