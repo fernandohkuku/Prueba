@@ -17,5 +17,7 @@ interface Dao {
     @Query("SELECT * FROM post")
     fun getPosts():LiveData<List<Post>>
 
+    @Query("UPDATE post set isRead=:isRead where id=:id")
+    suspend fun readPost(isRead:Boolean, id:Int)
 
 }

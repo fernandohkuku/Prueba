@@ -18,6 +18,8 @@ import com.fernando.prueba.models.Post
 )
 abstract class AppDatabase:RoomDatabase() {
 
+    abstract fun dao():Dao
+
     companion object {
         @Volatile
         private  var instance:AppDatabase?=null;

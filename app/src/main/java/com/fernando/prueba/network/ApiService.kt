@@ -1,5 +1,6 @@
 package com.fernando.prueba.network
 
+import com.fernando.prueba.interceptors.NetworkInterceptorConnection
 import com.fernando.prueba.models.Post
 import com.fernando.prueba.utils.BASE_URL
 import okhttp3.OkHttpClient
@@ -17,10 +18,13 @@ interface ApiService {
 
 
     companion object{
-        operator fun invoke():ApiService{
+        operator fun invoke(
+            networkInterceptorConnection: NetworkInterceptorConnection
+        ):ApiService{
             val client = OkHttpClient()
                 .newBuilder().readTimeout(40, TimeUnit.SECONDS)
                 .connectTimeout(40,TimeUnit.SECONDS)
+                .addInterceptor(networkInterceptorConnection)
                 .build()
 
             return Retrofit.Builder().baseUrl(BASE_URL)
