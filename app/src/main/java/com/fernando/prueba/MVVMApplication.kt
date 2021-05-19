@@ -7,6 +7,8 @@ import com.fernando.prueba.models.Post
 import com.fernando.prueba.network.ApiService
 import com.fernando.prueba.ui.post.PostRepository
 import com.fernando.prueba.ui.post.PostViewModelFactory
+import com.fernando.prueba.ui.user.UserRepository
+import com.fernando.prueba.ui.user.UserViewModelFactory
 import com.fernando.prueba.utils.BuildVersion
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -32,6 +34,11 @@ class MVVMApplication:Application(), KodeinAware {
 
         bind() from singleton { PostRepository(instance(), instance()) }
         bind() from provider { PostViewModelFactory(instance()) }
+
+
+        //Todo dependency injection User
+        bind() from singleton { UserRepository(instance(), instance()) }
+        bind() from provider { UserViewModelFactory(instance()) }
 
     }
 }

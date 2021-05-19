@@ -16,9 +16,10 @@ class PostRepository(
     private val db:AppDatabase
 ) :SafeApiRequest() {
 
-    private val posts = MutableLiveData<List<Post>>()
 
     internal suspend fun fetchPosts() = apiRequest { apiService.getPosts() }
+
+    internal suspend fun deletePost(id:String) = apiRequest { apiService.deletePost(id) }
 
     suspend fun savePosts(list: List<Post>) {
         db.dao().saveAllPosts(list);
@@ -28,6 +29,9 @@ class PostRepository(
 
     fun getPosts() = db.dao().getPosts()
 
+    suspend fun deletePost(id: Int) = db.dao().deletePost(id)
+
+    suspend fun deleteAllPosts() = db.dao().deleteAllPosts()
 
 
 
