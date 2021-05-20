@@ -29,6 +29,10 @@ class PostRepository(
 
     fun getPosts() = db.dao().getPosts()
 
+    fun getAllPosts()= db.dao().getAllPosts();
+
+    fun getFavorites() = db.dao().getFavoritePosts(true)
+
     suspend fun deletePost(id: Int) = db.dao().deletePost(id)
 
     suspend fun deleteAllPosts() = db.dao().deleteAllPosts()

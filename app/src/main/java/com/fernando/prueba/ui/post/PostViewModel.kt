@@ -15,6 +15,10 @@ class PostViewModel(
 
     fun getPosts() = repository.getPosts()
 
+    fun getAllPosts() = repository.getAllPosts()
+
+    fun getPostFavorites() = repository.getFavorites()
+
     suspend fun deletePost(id:String) = repository.deletePost(id);
 
      suspend fun deletePost(id: Int)  = repository.deletePost(id)

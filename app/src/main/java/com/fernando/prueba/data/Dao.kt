@@ -29,4 +29,10 @@ interface Dao {
     @Query("DELETE from post")
     suspend fun deleteAllPosts()
 
+    @Query("Select * from post where isFavorite=:isFavorite")
+    fun getFavoritePosts(isFavorite: Boolean = true):LiveData<List<Post>>
+
+    @Query("select * from post")
+    fun getAllPosts():LiveData<List<Post>>
+
 }
