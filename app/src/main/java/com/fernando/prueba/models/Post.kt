@@ -13,6 +13,7 @@ data class Post(
     var id:Int?=null,
     var title:String?=null,
     var body:String?=null,
+    @ColumnInfo
     var isFavorite:Boolean?=false,
     @ColumnInfo
     var isRead:Boolean?=false

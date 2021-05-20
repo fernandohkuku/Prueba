@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,6 +73,7 @@ class PostActivity : AppCompatActivity(R.layout.activity_post),
 
         this.binding.btnRefresh.setOnClickListener(this)
         this.binding.btnDelete.setOnClickListener(this)
+        this.binding.btnFilter.setOnClickListener(this)
     }
 
     private fun getPosts() = Coroutines.main {
@@ -109,6 +112,13 @@ class PostActivity : AppCompatActivity(R.layout.activity_post),
             Log.e("ROOM ERROR", e.message!!)
         }
 
+    }
+
+    private fun loadFragment(fragment:Fragment){
+        supportFragmentManager.beginTransaction().also {transaction->
+            transaction.replace(this.binding.container.id, fragment)
+                .addToBackStack(null).commit()
+        }
     }
 
     override fun onStarted() {
@@ -167,6 +177,10 @@ class PostActivity : AppCompatActivity(R.layout.activity_post),
             }
             this.binding.btnDelete->{
                 deleteAllPosts()
+                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+            this.binding.btnFilter->{
+                loadFragment(FilterFavoriteFragment())
             }
         }
     }
